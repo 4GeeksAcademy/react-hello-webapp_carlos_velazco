@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
+import { Card } from "./component/Card";
+import { Description } from "./component/Description";
+
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
@@ -26,6 +29,9 @@ const Layout = () => {
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
+						<Route path="/:type/:theid" element={<Description />} />
+						{/* <Route path="/planets/:theid" element={<Description />} />
+						<Route path="/vehicles/:theid" element={<Description />} /> */}
 					</Routes>
 					<Footer />
 				</ScrollToTop>
