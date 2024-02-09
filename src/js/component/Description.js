@@ -12,59 +12,58 @@ export const Description = () => {
   useEffect(() => {
     actions.getInformation(type, theid);
   }, [actions, type, theid]);
+  let renderAtributes
+  if (type === "people") {
 
-  const renderAttributes = () => {
-    switch (type) {
-      case "people":
-        return (
-          <>
-            <li>Hair color: {store.infoCharacter?.properties?.hair_color}</li>
-            <li>gender: {store.infoCharacter?.properties?.gender}</li>
-            <li>Eye color: {store.infoCharacter?.properties?.eye_color}</li>
-          </>
-        );
-      case "planets":
-        return (
-          <>
-            <li>Diameter: {store.infoCharacter?.properties?.diameter}</li>
-            <li>Terrain: {store.infoCharacter?.properties?.population}</li>
-            <li>Terrain: {store.infoCharacter?.properties?.climate}</li>
-          </>
-        );
-      case "vehicles":
-        return (
-          <>
-            <li>Model: {store.infoCharacter?.properties?.model}</li>
-            <li>Manufacturer: {store.infoCharacter?.properties?.manufacturer}</li>
-            <li>Manufacturer: {store.infoCharacter?.properties?.length}</li>
+    renderAtributes = (
+      <>
+        <li>Hair color: {store.infoCharacter?.properties?.hair_color}</li>
+        <li>gender: {store.infoCharacter?.properties?.gender}</li>
+        <li>Eye color: {store.infoCharacter?.properties?.eye_color}</li>
+      </>
+    );
+  }
+  else if (type === "planets") {
+    renderAtributes = (
+      <>
+        <li>Diameter: {store.infoCharacter?.properties?.diameter}</li>
+        <li>Terrain: {store.infoCharacter?.properties?.population}</li>
+        <li>Terrain: {store.infoCharacter?.properties?.climate}</li>
+      </>
+    );
+  }
+  else if (type === "vehicles") {
+    renderAtributes = (
+      <>
+        <li>Model: {store.infoCharacter?.properties?.model}</li>
+        <li>Manufacturer: {store.infoCharacter?.properties?.manufacturer}</li>
+        <li>Manufacturer: {store.infoCharacter?.properties?.length}</li>
 
-          </>
-        );
-      default:
-        return null;
-    }
-  };
+      </>
+    );
+  }
 
 
-  return (
+
+return (
 
 
-    <div className="card mb-3" style={{ maxwidth: "540px" }}>
-      <div className="row g-0">
-        <div className="col-md-4">
-          <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg" className="img-fluid rounded-start" alt="..." />
-        </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h2 className="card-title">{store.infoCharacter?.properties?.name}</h2>
-            <p className="card-text">{store.infoCharacter?.description}</p>
-            <ul>
-              {renderAttributes()}
-            </ul>
+  <div className="card mb-3" style={{ maxwidth: "540px" }}>
+    <div className="row g-0">
+      <div className="col-md-4">
+        <img className="img-fluid rounded-start" src={type === "people" ? `https://starwars-visualguide.com/assets/img/characters/${theid}.jpg` : `https://starwars-visualguide.com/assets/img/${type}/${theid}.jpg`} />
+      </div>
+      <div className="col-md-8">
+        <div className="card-body">
+          <h2 className="card-title">{store.infoCharacter?.properties?.name}</h2>
+          <p className="card-text">{store.infoCharacter?.description}</p>
+          <ul>
+            {renderAtributes}
+          </ul>
 
-          </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
